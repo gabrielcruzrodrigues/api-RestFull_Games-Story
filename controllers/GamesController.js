@@ -17,19 +17,29 @@ router.get("/games", (req, res) => {
 router.get("/games/:id", (req, res) => {
     const id = req.params.id;
 
-    Game.findOne({
-        where: {
-            id: id
-        }
-    })
-    .then((game) => {
-        res.statusCode = 200;
-        res.json(game);
-    })
-    .catch((error) => {
-        res.statusCode = 404;
-        res.send("error findbyid");
-    });
+    if (isNaN(id)) {
+        res.sendStatus(400);
+    } else {
+        
+        Game.findOne({
+            where: {
+                id: id
+            }
+        })
+        .then((game) => {
+            if (game != undefined) {
+                res.statusCode = 200;
+                res.json(game);
+            } else {
+                res.sendStatus(404);
+            }
+            
+        })
+        .catch((error) => {
+            res.send(error);
+        });
+    }
+    
 });
 
 router.post("/games", (req, res) => {
