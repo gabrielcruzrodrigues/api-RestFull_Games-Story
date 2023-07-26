@@ -84,17 +84,21 @@ router.post("/games", (req, res) => {
 router.delete("/games/:id", (req, res) => {
     const id = req.params.id;
 
-    Game.destroy({
-        where: {id: id}
-    })
-    .then(() => {
-        res.statusCode = 200;
-        res.send("game deleted!");
-    })
-    .catch((error) => {
-        res.statusCode = 404;
-        res.send(error);
-    });
+    if (isNaN(id)) {
+        res.sendStatus(400);
+    } else {
+        Game.destroy({
+            where: {id: id}
+        })
+        .then(() => {
+            res.statusCode = 200;
+            res.send("game deleted!");
+        })
+        .catch((error) => {
+            res.statusCode = 400;
+            res.send(error);
+        });
+    }
 });
 
 module.exports = router;
