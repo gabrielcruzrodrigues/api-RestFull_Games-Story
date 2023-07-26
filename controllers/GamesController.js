@@ -5,9 +5,11 @@ const Game = require("../model/Game");
 router.get("/games", (req, res) => {
     Game.findAll()
         .then((games) => {
+            res.statusCode = 200;
             res.send(games);
         })
         .catch((error) => {
+            res.statusCode = 404;
             res.send(error);
         });
 });
@@ -21,9 +23,11 @@ router.get("/games/:id", (req, res) => {
         }
     })
     .then((game) => {
+        res.statusCode = 200;
         res.json(game);
     })
     .catch((error) => {
+        res.statusCode = 404;
         res.send("error findbyid");
     });
 });
@@ -39,9 +43,11 @@ router.post("/games", (req, res) => {
         price: price
     })
     .then(() => {
+        res.statusCode = 200;
         res.send("game created!");
     })
     .catch((error) => {
+        res.statusCode = 404;
         res.send(error);
     });
 });
@@ -64,5 +70,21 @@ router.post("/games", (req, res) => {
 //     });
 //     res.send("oi");
 // });
+
+router.delete("/games/:id", (req, res) => {
+    const id = req.params.id;
+
+    Game.destroy({
+        where: {id: id}
+    })
+    .then(() => {
+        res.statusCode = 200;
+        res.send("game deleted!");
+    })
+    .catch((error) => {
+        res.statusCode = 404;
+        res.send(error);
+    });
+});
 
 module.exports = router;
