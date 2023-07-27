@@ -1,5 +1,5 @@
 # api REST com Node.js
-api rest com crud completo e padrão mvc
+api REST com crud completo, padrão mvc e banco de dados
 
 # Definições e caracteristicas do projeto:
 - Padrão REST
