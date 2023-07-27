@@ -43,23 +43,25 @@ router.get("/games/:id", (req, res) => {
 });
 
 router.post("/games", (req, res) => {
-    const name = req.body.name;
-    const age = req.body.age;
-    const price = req.body.price;
+    const {name, age, price} = req.body;
 
-    Game.create({
-        name: name,
-        age: age,
-        price: price
-    })
-    .then(() => {
-        res.statusCode = 200;
-        res.send("game created!");
-    })
-    .catch((error) => {
-        res.statusCode = 404;
-        res.send(error);
-    });
+    if (!name || !age || isNaN(age) || price < 0 || price == undefined || price == null || isNaN(price)) {
+        res.sendStatus(400);
+     } else {
+        Game.create({
+            name: name,
+            age: age,
+            price: price
+        })
+        .then(() => {
+            res.statusCode = 200;
+            res.send("game created!");
+        })
+        .catch((error) => {
+            res.statusCode = 404;
+            res.send(error);
+        });
+    }
 });
 
 // router.put("/games", (req, res) => {
