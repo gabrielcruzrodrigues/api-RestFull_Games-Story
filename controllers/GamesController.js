@@ -73,7 +73,6 @@ router.put("/games/:id", (req, res) => {
         if (id < 1) {
             res.sendStatus(400);
         } else {
-            console.log('passou');
             Game.findOne({ where: { id: id } })
                 .then((game) => {
                     if (!game) {
@@ -83,40 +82,20 @@ router.put("/games/:id", (req, res) => {
 
                         if (name != undefined) {
                             Game.update({ name: name }, { where: { id: id } })
-                                .then(() => {
-                                    res.statusCode = 200;
-                                    res.send("game updated!");
-                                })
-                                .catch(() => {
-                                    // res.sendStatus(400);
-                                });
                         };
 
                         if (age != undefined) {
                             Game.update({ age: age }, { where: { id: id } })
-                                .then(() => {
-                                    res.statusCode = 200;
-                                    res.send("game updated!");
-                                })
-                                .catch(() => {
-                                    // res.sendStatus(400);
-                                });
                         };
 
                         if (price != undefined) {
                             Game.update({ price: price }, { where: { id: id } })
-                                .then(() => {
-                                    res.statusCode = 200;
-                                    res.send("game updated!");
-                                })
-                                .catch(() => {
-                                    // res.sendStatus(400);
-                                });
                         };
                     };
+                    res.status(200).send("game updated!");
                 })
                 .catch(() => {
-                    res.sendStatus(400);
+                    res.status(400).send("error updating game");
                 });
         };
     };
