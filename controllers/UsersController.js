@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require("../model/User");
 const jwt = require("jsonwebtoken");
 const JWTsecret = "jasjfkashfjasbfnsjfadskfhsfjasklfjakfjakjafjalskf";
-const auth = require("../middlewars/auth"); 
+const auth = require("../middleware/auth"); 
 
 router.get("/users", auth, (req, res) => {
     let HATEOAS = [
@@ -28,7 +28,7 @@ router.get("/users", auth, (req, res) => {
         .then((users) => {
             res.status(200).json({users: users, _links: HATEOAS});
         }).catch((error) => {
-            res.status(404).send(error);
+            res.status(400).json(error);
         })
 })
 
@@ -64,12 +64,12 @@ router.get("/users/:id", auth, (req, res) => {
     ];
 
     if (isNaN(id) || id < 1) {
-        res.sendStatus(400);
+        res.status(400).json({error: "invalid id."});
     } else {
         User.findOne({ where: { id: id } })
             .then((user) => {
                 if (!user) {
-                    res.status(404).json({error: "user not found."});
+                    res.status(404).json({error: "the user not found."});
                 } else {
                     res.status(200).json({user: user, _links: HATEOAS});
                 }
@@ -101,7 +101,7 @@ router.post("/users", (req, res) => {
     ];
 
     if (!name || !email || !password) {
-        res.sendStatus(404);
+        res.sendStatus(400).json({error: "invalid fields"});
     } else {
         User.create({
             name: name,
@@ -132,8 +132,8 @@ router.delete("/users/:id", auth, (req, res) => {
         },
     ];
 
-    if (isNaN(id) || id < 1) {
-        res.sendStatus(400);
+    if (isNaN(id) || id < 1 || !id) {
+        res.status(400).json({error: "invalid id."});
     } else {
         User.destroy({where: {id: id}})
             .then((response) => {
