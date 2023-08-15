@@ -221,3 +221,144 @@ Motivos: Token inválido, Token expirado.
 }
 ```
 ---
+### 🔹 GET /users
+endpoint responsável por retornar todos os usuários cadastrados no banco de dados.
+#### Parametros
+Nenhum.
+### Respostas
+  * **_200_** - ok.
+esse statusCode indica o retorno de todos os usuários.
+```
+[
+  "users": [
+        {
+            "id": 1,
+            "name": "Gabriel",
+            "email": "gabriel@gmail.com",
+            "password": "123456",
+            "createdAt": "2023-08-08T11:57:54.000Z",
+            "updatedAt": "2023-08-08T11:57:54.000Z"
+        }
+]
+```
+* **_401_** - Falha na autenticação.
+Motivos: Token inválido, Token expirado.
+```
+{
+    "error": "invalid Token"
+}
+```
+---
+### 🔹 GET /games/:id
+endpoint responsável por retornar o usuário específico do banco de dados.
+#### Parametros
+* params: id do usuário.
+### Respostas
+* **_200_** - ok.
+esse statusCode indica o retorno do game indicado pelo id.
+```
+[
+  "users": [
+        {
+            "id": 5,
+            "name": "Gabriel",
+            "email": "gabriel@gmail.com",
+            "password": "123456",
+            "createdAt": "2023-08-08T11:57:54.000Z",
+            "updatedAt": "2023-08-08T11:57:54.000Z"
+        }
+]
+```
+* **_401_** - Falha na autenticação.
+Motivos: Token inválido, Token expirado.
+```
+{
+    "error": "invalid Token"
+}
+```
+* **_404_** - usuário não encontrado.
+O id indicado não pertence a um usuário.
+```
+{
+    "error": "the user not found."
+}
+```
+* **_400_** - invalid id.
+motivos: id invalido, não numerico ou inexistente.
+```
+{
+    "error": "invalid id."
+}
+```
+---
+### 🔹 POST /games
+endpoint responsável por criar usuários no banco de dados.
+#### Parametros
+* name: nome do usuário.
+
+* email: email do usuário.
+
+* password: senha do usuário.
+```
+{
+    "name": "Gabriel",
+    "email": "gabriel@gmail.com",
+    "password": 123456
+}
+```
+### Respostas
+* **_201_** - Created.
+esse statusCode indica a criação do usuário.
+```
+{
+    "msg": "user created!"
+}
+```
+* **_401_** - Falha na autenticação.
+Motivos: Token inválido, Token expirado.
+```
+{
+    "error": "invalid Token"
+}
+```
+* **_422_** - Unprocessable Entity
+motivos: campos vazios ou inexistentes, ou preenchidos incorretamente.
+```
+{
+    "error": "invalid filds."
+}
+```
+---
+### 🔹 DELETE /games/:id
+endpoint responsável por deletar usuários cadastrados no banco de dados.
+#### Parametros
+id: id que pertence ao usuário.
+### Respostas
+* **_200_** - ok.
+esse statusCode indica que o usuário foi deletado.
+```
+{
+    "msg": "user deleted"
+}
+```
+* **_400_** - invalid id.
+motivos: id invalido, não numerico ou inexistente.
+```
+{
+    "error": "invalid id"
+}
+```
+* **_401_** - Falha na autenticação.
+Motivos: Token inválido, Token expirado.
+```
+{
+    "error": "invalid Token"
+}
+```
+* **_404_** - usuário não encontrado.
+```
+{
+    "error": "user not found"
+}
+```
+---
