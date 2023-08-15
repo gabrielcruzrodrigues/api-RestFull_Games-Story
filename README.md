@@ -249,7 +249,7 @@ Motivos: Token inválido, Token expirado.
 }
 ```
 ---
-### 🔹 GET /games/:id
+### 🔹 GET /users/:id
 endpoint responsável por retornar o usuário específico do banco de dados.
 #### Parametros
 * params: id do usuário.
@@ -291,7 +291,7 @@ motivos: id invalido, não numerico ou inexistente.
 }
 ```
 ---
-### 🔹 POST /games
+### 🔹 POST /users
 endpoint responsável por criar usuários no banco de dados.
 #### Parametros
 * name: nome do usuário.
@@ -329,7 +329,7 @@ motivos: campos vazios ou inexistentes, ou preenchidos incorretamente.
 }
 ```
 ---
-### 🔹 DELETE /games/:id
+### 🔹 DELETE /users/:id
 endpoint responsável por deletar usuários cadastrados no banco de dados.
 #### Parametros
 id: id que pertence ao usuário.
