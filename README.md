@@ -19,7 +19,6 @@ api RestFull com crud completo, padrão mvc e banco de dados
 - Configure o arquivo `connection`, alterando o usuario e a senha de acordo com a configuração do seu banco de dados.
 - No terminal, digite o comando `npm install`
 - No terminal, digite o comando `npm start`
-- Digite o comando `node index.js`
 - Use a documentação abaixo para conseguir acessar a Api facilmente.
 
 # Documentação da api
