@@ -4,6 +4,7 @@ api RestFull com crud completo, padrão mvc e banco de dados
 # Definições e caracteristicas do projeto:
 - Padrão RestFull
 - Padrão MVC
+- Uso do HATEOAS
 - Uso da ORM Sequelize
 - Node.js como linguagem principal
 - MySQL como banco de dados
