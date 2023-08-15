@@ -188,7 +188,7 @@ Não foi encontrado um game referente ao id indicado.
 }
 ```
 ---
-### 🔹 DELETE /categories/:id
+### 🔹 DELETE /games/:id
 endpoint responsável por deletar categorias cadastradas no banco de dados.
 #### Parametros
 id: id que pertence a categoria.
